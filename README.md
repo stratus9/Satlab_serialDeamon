@@ -10,3 +10,10 @@ Inicjalizacja czystego Oniona:
 7) npm init -y
 8) npm install github:sdesalas/node-serialport-omega2
 9) npm install crc binary-parser
+
+
+# Help sites
+
+Biblioteka CRC: https://github.com/alexgorbatchev/node-crc
+Parser binarny: https://github.com/keichi/binary-parser
+Customowy parser serial: https://stackoverflow.com/questions/44820013/custom-parser-for-node-serialport
