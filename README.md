@@ -11,6 +11,8 @@ Inicjalizacja czystego Oniona:
 8) npm install github:sdesalas/node-serialport-omega2
 9) npm install crc binary-parser
 
+# Disable debug on Serial port 0
+https://www.hackster.io/sidwarkd/free-up-the-serial-port-on-the-onion-omega-7b3849
 
 # Help sites
 
