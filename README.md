@@ -9,3 +9,4 @@ Inicjalizacja czystego Oniona:
 6) cd Satlab_serialDeamon
 7) npm init -y
 8) npm install github:sdesalas/node-serialport-omega2
+9) npm install crc binary-parser
