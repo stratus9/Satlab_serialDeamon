@@ -1,0 +1,20 @@
+{
+  "name": "Satlab_serialDeamon",
+  "version": "1.0.0",
+  "description": "Inicjalizacja czystego Oniona: 1) opkg update 2) opkg install git 3) opkg install nodejs 4) opkg install npm 5) git clone https://github.com/stratus9/Satlab_serialDeamon.git 6) cd Satlab_serialDeamon 7) npm init -y 8) npm install github:sdesalas/node-serialport-omega2",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stratus9/Satlab_serialDeamon.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stratus9/Satlab_serialDeamon/issues"
+  },
+  "homepage": "https://github.com/stratus9/Satlab_serialDeamon#readme"
+}
