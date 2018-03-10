@@ -7,9 +7,8 @@ Inicjalizacja czystego Oniona:
 4) opkg install npm
 5) git clone https://github.com/stratus9/Satlab_serialDeamon.git
 6) cd Satlab_serialDeamon
-7) npm init -y
-8) npm install github:stratus9/node-serialport-omega2 --save
-9) npm install crc binary-parser --save
+7) npm update
+
 
 ## Disable debug on Serial port 0
 https://www.hackster.io/sidwarkd/free-up-the-serial-port-on-the-onion-omega-7b3849
