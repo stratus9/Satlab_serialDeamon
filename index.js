@@ -1,5 +1,108 @@
 var serialport = require('serialport');
 var SerialPort = serialport.SerialPort;
+var app = require('http').createServer()
+var io = require('socket.io')(app);
+app.listen(8080);
+
+//---------------------------------------------------------------------------
+//----------------------- Sockets setup -------------------------------------
+//---------------------------------------------------------------------------
+io.sockets.on('connection',
+  function(socket) {
+    console.log("We have a new client: " + socket.id);
+    socket.on('disconnect', function() {
+      console.log("Client has disconnected");
+    });
+  }
+);
+
+//---------------------------------------------------------------------------
+//----------------------- Data update to www --------------------------------
+//---------------------------------------------------------------------------
+setInterval(dataUpdate, 1000);
+
+function dataUpdate() {
+  io.sockets.emit('update-msg', sensorDataPacket);
+}
+
+//---------------------------------------------------------------------------
+//----------------------- Data update to DB ---------------------------------
+//---------------------------------------------------------------------------
+function sendSensorDataToDB() {
+  //console.log('Database updated');
+}
+
+//---------------------------------------------------------------------------
+//----------------------- Misc functions ------------------------------------
+//---------------------------------------------------------------------------
+function getRandomArbitrary(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
+//---------------------------------------------------------------------------
+//----------------------- Data update from HW -------------------------------
+//---------------------------------------------------------------------------
+var sensorDataPacket;
+var isNewSensorDataAvalable = false;
+
+var dateNow = new Date();
+var dateStart = new Date(dateNow.getFullYear(), 0, 0);
+var dayOfTheYear = Math.floor((dateNow - dateStart) / (1000 * 60 * 60 * 24));
+var timeSenconds = dateNow.getHours()*60*60 + dateNow.getMinutes()*60 + dateNow.getSeconds();
+// var currentYear = dateNow.getFullYear();
+
+setInterval(HWupdate, 1001);
+
+function HWupdate() {
+  dateNow = new Date();
+  sensorDataPacket = {
+    coilXCurrent: 1200 + getRandomArbitrary(-10, 10),
+    coilYCurrent: 200 + getRandomArbitrary(-10, 3),
+    coilZCurrent: 50 + getRandomArbitrary(-5, 10),
+    batteryLevel: 0.85 + getRandomArbitrary(-0.02, 0.02),
+    batteryVoltage: 4.05 + getRandomArbitrary(-0.05, 0.05),
+    status: 'RUN',
+    magnetic: {
+	magX: MagX,
+    	magY: MagY,
+    	magZ: MagZ
+    },
+    orient: {
+      q_a:  0.175,
+      q_b:  0.791,
+      q_c: -0.314,
+      q_d:  0.495
+    },
+    omega: {
+      omega_x: GyroX,
+      omega_y: GyroY,
+      omega_z: GyroZ
+    },
+    accel: {
+      accelX : AccelX,
+      accelY : AccelY,
+      accelZ : AccelZ
+    },
+    position: {
+      altitude: 300 + 6378,
+      latitude: 50,
+      longitude: 20
+    },
+    calendar: {
+      dayOfTheYear: dayOfTheYear,
+      year: dateNow.getFullYear(),
+      hours: dateNow.getHours(),
+      minutes: dateNow.getMinutes(),
+      seconds: dateNow.getSeconds(),
+      miliseconds: dateNow.getMilliseconds()
+    }
+  }
+  sendSensorDataToDB();
+}
+
+//--------------------------------------------------------------------
+//-------------------- Serial port -----------------------------------
+//--------------------------------------------------------------------
 
 //------------------- Zmienne globalne -------------------------------
 var NewFrameReceived = false;
